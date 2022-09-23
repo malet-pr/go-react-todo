@@ -1,0 +1,53 @@
+body {
+  background: plum;
+}
+
+.header {
+  color:black;
+  text-align: center;
+}
+
+.block {
+  padding: 1rem 3rem;
+  align-items: center;
+}
+  
+.task-button{
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
+
+.ui.modal {
+  background: violet;    
+}
+
+.ui.modal > .content {
+  background: violet;    
+}
+
+.ui.button  {
+  background-color: purple;
+  color:white;
+  font-weight: 500;
+  border-radius: 15px;
+  float:right;
+  margin-bottom: 20px;
+}
+
+.ui.button:hover  {
+  background-color: rgba(199, 52, 204, 0.8);
+}
+
+.ui[class*="right floated"].buttons,
+.ui[class*="right floated"].button {
+  float: right;
+  margin-bottom: 20px;
+}
+
+.ui.toggle.checkbox input:focus:checked ~ .box:before,
+.ui.toggle.checkbox input:focus:checked ~ label:before {
+  background-color: purple !important;
+}

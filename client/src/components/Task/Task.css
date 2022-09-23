@@ -1,0 +1,20 @@
+.container {
+  background: purple;
+  max-width: 70%;
+  border-radius: 15px;
+  margin: 10px auto ;
+  color: white;
+  font-weight: 600;
+  font-size: 1.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.completed{
+  text-decoration-line: none;
+  text-decoration-thickness: 3px;
+  text-decoration-style: wavy;
+  text-decoration-color: black;
+}

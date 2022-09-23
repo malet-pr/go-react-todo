@@ -1,0 +1,29 @@
+.root {
+  max-width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+body {
+  background: plum;
+}
+
+.header {
+  color:black;
+  text-align: center;
+}
+
+.block {
+  padding: 1rem 3rem;
+  align-items: center;
+}
+  
+.task-button{
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+}
+

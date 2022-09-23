@@ -1,0 +1,27 @@
+
+.ui.form input[type="text"] 
+.ui.form input[type="datetime-local"]
+
+.ui.button  {
+  background-color: purple;
+  color:white;
+  font-weight: 500;
+  border-radius: 15px;
+  float:right;
+  margin-bottom: 20px;
+}
+
+.ui.button:hover  {
+  background-color: rgba(199, 52, 204, 0.8);
+}
+
+.ui[class*="right floated"].buttons,
+.ui[class*="right floated"].button {
+  float: right;
+  padding-bottom: 10px;
+}
+
+.ui.toggle.checkbox input:focus:checked ~ .box:before,
+.ui.toggle.checkbox input:focus:checked ~ label:before {
+  background-color: purple !important;
+}
