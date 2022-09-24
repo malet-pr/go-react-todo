@@ -18,7 +18,7 @@ function Task(props) {
     function handleCloseModal(event, title, description) {
         setIsOpen(false);
         if(title != null) 
-        props.editTask(props.task.id,title,description)
+        props.editTask(props.task._id,title,description)
     }
 
     return (
@@ -28,8 +28,8 @@ function Task(props) {
                     {props.task.title} 
                 </div>
                 <div style={{float:'right'}}>
-                    <Icon color='green' name='check' onClick={() => props.toggleTaskCompleted(props.task.id)}/>
-                    <Icon color='red' name='delete' onClick={() => props.deleteTask(props.task.id)}/>
+                    <Icon color='green' name='check' onClick={() => props.toggleTaskCompleted(props.task._id)}/>
+                    <Icon color='red' name='delete' onClick={() => props.deleteTask(props.task._id)}/>
                     <Icon color='yellow' name='edit' onClick={openFromTask}/>
                 </div>
                 <AddTask task={props.task} isEdited={isEdited} IsModalOpened={modalIsOpen} onCloseModal={handleCloseModal} />

@@ -19,6 +19,6 @@ func Router() http.Handler {
 	r.HandleFunc("/api/v1/tasks/delete-all", middleware.DeleteAllTasks).Methods("DELETE", "OPTIONS")
 	r.HandleFunc("/api/v1/tasks/complete-task/{id}", middleware.CompleteTask).Methods("PUT", "OPTIONS")
 	r.HandleFunc("/api/v1/tasks/undo-task/{id}", middleware.UndoCompleteTask).Methods("PUT", "OPTIONS")
-	handler := cors.Default().Handler(r)
+	handler := cors.AllowAll().Handler(r)
 	return handler
 }

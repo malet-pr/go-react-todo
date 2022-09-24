@@ -2,6 +2,7 @@ import React,{useState,useRef} from 'react'
 import {Form,Button,Radio,Icon} from 'semantic-ui-react';
 import Modal from 'react-modal';
 import './AddTask.css';
+import {CreateTask} from '../../service/apiCalls.js';
 
 Modal.setAppElement('#root');
 
@@ -20,7 +21,8 @@ function AddTask(props) {
         return;
       }
       if (!props.isEdited ){
-        let newTask={'id': 10,'title': title,'description':description,'completed': false};
+        let newTask={'title': title,'description':description,'completed': false};
+        CreateTask(newTask);
         title = '';
         description = '';
         props.onCloseModal(event, newTask);

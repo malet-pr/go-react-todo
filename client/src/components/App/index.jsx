@@ -1,32 +1,19 @@
 import React,{useState,useEffect} from 'react';
 import {Header,Icon} from 'semantic-ui-react';
-import axios from 'axios'
 import TodoList from '../TodoList';
 import Task from '../Task';
 import AddTask from '../AddTask';
 import './App.css';
+import {GetAllTasks,RemoveTask,FinishTask,UndoTask} from '../../service/apiCalls.js';
 
-const baseUrl = "http://localhost:9000/tasks";
 
 function App() {
 
-    /*const [tasks, setTasks] = useState([]);
-    axios(baseUrl).then(response =>setTasks(response.data)); */
+  const [tasks, setTasks] = useState([]);
 
-  const [tasks, setTasks] = useState([
-    {'id': 1,
-    'title': 'Work',
-    'description':'lo que sea',
-    'completed': true},
-    {'id': 2,
-    'title': 'Study',
-    'description':'lo que sea',
-    'completed':true},
-    {'id': 3,
-    'title': 'Watch TV',
-    'description':'lo que sea',
-    'completed':false},
-  ]);
+  useEffect(() => {
+    GetAllTasks().then(setTasks);
+  }, []);
 
   const [newTask,setNewTask] = useState([]);
   const [title,setTitle] = useState('');
@@ -47,9 +34,14 @@ function App() {
     setTasks([...tasks, task]);
   }  
 
-  function toggleTaskCompleted(id) {
+  function toggleTaskCompleted(_id) {
     const updatedTasks = tasks.map((task) => {
-      if (id === task.id) {
+      if (_id === task._id) {
+        if(task.completed){
+          UndoTask(task._id);
+        } else {
+          FinishTask(task._id);
+        }
         return {...task, completed: !task.completed}
       }
       return task;
@@ -57,14 +49,15 @@ function App() {
     setTasks(updatedTasks);
   }
   
-  function deleteTask(id) {
-    const remainingTasks = tasks.filter((task) => id !== task.id);
+  function deleteTask(_id) {
+    RemoveTask(_id);
+    const remainingTasks = tasks.filter((t) => _id !== t._id);
     setTasks(remainingTasks);
   } 
 
   function editTask(id, title, description) {
     const editedTaskList = tasks.map((task) => {
-      if (id === task.id) {
+      if (id === task._id) {
         return {id:task.id, title:title, description:description, completed:false};
       }
       return task;

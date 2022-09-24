@@ -1,5 +1,58 @@
 import axios from 'axios';
 
-let baseUrl = "http://localhost:9000";
+let baseUrl = "http://localhost:9000/api/v1/tasks";
+let getAllTasks = "/find-all";
+let createTask = "/add-task";
+let removeTask = "/delete-task/";
+let finishTask = "/complete-task/";
+let undoTask = "/undo-task/";
+let getById = "/find-by-id/";
+let findByTitle = "/find-by-title/";
+let changeTask = "/edit-task/";
+let removeAll = "/delete-all";
 
-const allTasks = axios(baseUrl).then(tasks =>{console.log(tasks);});
+
+async function GetAllTasks() {
+    const response = await axios.get(baseUrl+getAllTasks);
+    const list = await response.data;
+    return list;
+}
+
+async function CreateTask(body) {
+    const response = await axios.post(baseUrl+createTask,body);
+}
+
+async function RemoveTask(id){
+    const response = await axios.delete(baseUrl+removeTask+id);
+}
+
+async function FinishTask(id){
+    const response = await axios.put(baseUrl+finishTask+id);
+}
+
+async function UndoTask(id){
+    const response = await axios.put(baseUrl+undoTask+id);
+}
+
+async function GetById(id){
+    const response = await axios.get(baseUrl+getById+id);
+    const one = await response.data;
+    return one;
+}
+
+async function FindByTitle(string){
+    const response = await axios.get(baseUrl+findByTitle+string);
+    const list = await response.data;
+    return list;
+}
+
+async function ChangeTask(id){
+    const response = await axios.patch(baseUrl+changeTask+id);
+}
+ 
+async function RemoveAll(){
+    const response = await axios.delete(baseUrl+removeAll);
+}
+
+
+export {GetAllTasks,CreateTask,RemoveTask,FinishTask,UndoTask,GetById,FindByTitle,ChangeTask,RemoveAll}
