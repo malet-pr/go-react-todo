@@ -4,7 +4,7 @@ import TodoList from '../TodoList';
 import Task from '../Task';
 import AddTask from '../AddTask';
 import './App.css';
-import {GetAllTasks,RemoveTask,ToggleTask} from '../../service/apiCalls.js';
+import {GetAllTasks,RemoveTask,ToggleTask,ChangeTask} from '../../service/apiCalls.js';
 
 
 function App() {
@@ -51,10 +51,10 @@ function App() {
     setTasks(remainingTasks);
   } 
 
-  function editTask(id, title, description) {
+  function editTask(_id, title, description) {
     const editedTaskList = tasks.map((task) => {
-      if (id === task._id) {
-        return {id:task.id, title:title, description:description, completed:false};
+      if (_id === task._id) {
+        return {_id:task._id, title:title, description:description, completed:task.completed};
       }
       return task;
     });

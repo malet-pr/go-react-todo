@@ -1,8 +1,8 @@
-import React,{useState,useRef} from 'react'
-import {Form,Button,Radio,Icon} from 'semantic-ui-react';
+import React,{useState} from 'react'
+import {Form,Button,Icon} from 'semantic-ui-react';
 import Modal from 'react-modal';
 import './AddTask.css';
-import {CreateTask} from '../../service/apiCalls.js';
+import {CreateTask,ChangeTask} from '../../service/apiCalls.js';
 
 Modal.setAppElement('#root');
 
@@ -29,6 +29,8 @@ function AddTask(props) {
       } else {
         if(title == '') {title=oldTitle};
         if(description == '') {description = oldDescription};
+        let changedTask = {'_id':props.task._id,'title': title,'description':description,'completed': props.task.completed};
+        ChangeTask(changedTask._id,changedTask);
         props.onCloseModal(event, title,description);
       }
     }

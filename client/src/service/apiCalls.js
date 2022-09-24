@@ -41,8 +41,8 @@ async function FindByTitle(string){
     return list;
 }
 
-async function ChangeTask(id){
-    const response = await axios.patch(baseUrl+changeTask+id);
+async function ChangeTask(id,body){
+    const response = await axios.patch(baseUrl+changeTask+id,body);
 }
  
 async function RemoveAll(){
