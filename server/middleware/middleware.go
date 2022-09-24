@@ -126,42 +126,28 @@ func deleteAllTasks() int64 {
 	return res.DeletedCount
 }
 
-func CompleteTask(w http.ResponseWriter, r *http.Request) {
+func ToggleTask(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
 	w.Header().Set("Allow-Methods", "PUT")
 	w.Header().Set("Allow-Headers", "Content-Type")
 	params := mux.Vars(r)
-	taskCompleted(params["id"])
+	toggleCompleted(params["id"])
 	json.NewEncoder(w).Encode(params["id"])
 }
-func taskCompleted(s string) {
+func toggleCompleted(s string) {
 	id, _ := primitive.ObjectIDFromHex(s)
 	filter := bson.M{"_id": id}
-	update := bson.M{"$set": bson.M{"completed": true}}
+	res := collection.FindOne(context.Background(), bson.M{"_id": id})
+	task := &model.Task{}
+	res.Decode(task)
+	update := bson.M{"$set": bson.M{"completed": !task.Completed }}
 	_, err := collection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	fmt.Printf("Completed task with ID = %v \n", id)
-}
-
-func UndoCompleteTask(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Allow-Methods", "PUT")
-	w.Header().Set("Allow-Headers", "Content-Type")
-	params := mux.Vars(r)
-	undoCompleted(params["id"])
-	json.NewEncoder(w).Encode(params["id"])
-}
-func undoCompleted(s string) {
-	id, _ := primitive.ObjectIDFromHex(s)
-	filter := bson.M{"_id": id}
-	update := bson.M{"$set": bson.M{"completed": false}}
-	_, err := collection.UpdateOne(context.Background(), filter, update)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	fmt.Printf("Set task with ID = %v as incomplete\n", id)
+	var status string
+	if !task.Completed{status="complete"} else {status="incomplete"}
+	fmt.Printf("Set task with ID = %v as %s\n", id,status)
 }
 
 func EditTask(w http.ResponseWriter, r *http.Request) {
