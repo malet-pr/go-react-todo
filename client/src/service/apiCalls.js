@@ -4,8 +4,7 @@ let baseUrl = "http://localhost:9000/api/v1/tasks";
 let getAllTasks = "/find-all";
 let createTask = "/add-task";
 let removeTask = "/delete-task/";
-let finishTask = "/complete-task/";
-let undoTask = "/undo-task/";
+let toggleTask = "/toggle-task/";
 let getById = "/find-by-id/";
 let findByTitle = "/find-by-title/";
 let changeTask = "/edit-task/";
@@ -26,12 +25,8 @@ async function RemoveTask(id){
     const response = await axios.delete(baseUrl+removeTask+id);
 }
 
-async function FinishTask(id){
-    const response = await axios.put(baseUrl+finishTask+id);
-}
-
-async function UndoTask(id){
-    const response = await axios.put(baseUrl+undoTask+id);
+async function ToggleTask(id){
+    const response = await axios.put(baseUrl+toggleTask+id);
 }
 
 async function GetById(id){
@@ -55,4 +50,4 @@ async function RemoveAll(){
 }
 
 
-export {GetAllTasks,CreateTask,RemoveTask,FinishTask,UndoTask,GetById,FindByTitle,ChangeTask,RemoveAll}
+export {GetAllTasks,CreateTask,RemoveTask,ToggleTask,GetById,FindByTitle,ChangeTask,RemoveAll}

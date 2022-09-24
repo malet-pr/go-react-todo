@@ -4,7 +4,7 @@ import TodoList from '../TodoList';
 import Task from '../Task';
 import AddTask from '../AddTask';
 import './App.css';
-import {GetAllTasks,RemoveTask,FinishTask,UndoTask} from '../../service/apiCalls.js';
+import {GetAllTasks,RemoveTask,ToggleTask} from '../../service/apiCalls.js';
 
 
 function App() {
@@ -37,11 +37,7 @@ function App() {
   function toggleTaskCompleted(_id) {
     const updatedTasks = tasks.map((task) => {
       if (_id === task._id) {
-        if(task.completed){
-          UndoTask(task._id);
-        } else {
-          FinishTask(task._id);
-        }
+        ToggleTask(_id);
         return {...task, completed: !task.completed}
       }
       return task;
