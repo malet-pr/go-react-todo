@@ -24,6 +24,14 @@ body {
   cursor: pointer;
   position: absolute;
   bottom: 50px;
-  right: 50px;
+  right: 100px;
+}
+
+.delete-button{
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 50px;
+  left: 100px;
 }
 
